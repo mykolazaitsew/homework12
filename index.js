@@ -45,14 +45,33 @@ function task3(...fns) {
     };
 }
 
+// const add2 = x => x + 2;
+// const multiply3 = x => x * 3;
+// const decrement1 = x => x - 1;
+
+// const sequence = task3(add2, multiply3, decrement1);
+
+// console.log(sequence(7));
+// console.log(sequence(10));
+
+
+function task3rework(...fns) {
+  return function(initialValue) {
+    let result = initialValue;
+    for (const fn of fns) {
+      result = fn(result);
+    }
+    return result;
+  };
+}
+
 const add2 = x => x + 2;
 const multiply3 = x => x * 3;
 const decrement1 = x => x - 1;
 
-const sequence = task3(add2, multiply3, decrement1);
+const sequentialFunction = task3rework(add2, multiply3, decrement1);
 
-console.log(sequence(7));
-console.log(sequence(10));
+console.log(sequentialFunction(2));
 
  
 
