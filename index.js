@@ -32,3 +32,27 @@ console.log(increment());
 console.log(increment()); 
 console.log(decrement()); 
 console.log(reset());
+
+function task3(...fns) {
+    return function(initialValue) {
+        function applyFn(index, value) {
+            if (index >= fns.length) {
+                return value;
+            }
+            return applyFn(index + 1, fns[index](value));
+        }
+        return applyFn(0, initialValue);
+    };
+}
+
+const add2 = x => x + 2;
+const multiply3 = x => x * 3;
+const decrement1 = x => x - 1;
+
+const sequence = task3(add2, multiply3, decrement1);
+
+console.log(sequence(7));
+console.log(sequence(10));
+
+ 
+
